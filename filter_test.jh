@@ -1,0 +1,116 @@
+
+entity RegionX {
+	regionName String
+}
+
+entity CountryX {
+	countryName String
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity LocationX {
+	streetAddress String,
+	postalCode String,
+	city String,
+	stateProvince String
+}
+
+entity DepartmentX {
+	departmentName String required
+}
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+entity TaskX {
+	title String,
+	description String
+}
+
+/**
+ * The Employee entity.
+ */
+entity EmployeeX {
+	/**
+	* The firstname attribute.
+	*/
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber String,
+	hireDate Instant,
+	salary Long,
+	commissionPct Long
+}
+
+entity JobX {
+	jobTitle String,
+	minSalary Long,
+	maxSalary Long
+}
+
+entity JobHistoryX {
+	startDate Instant,
+	endDate Instant,
+	language Language
+}
+
+enum LanguageX {
+    FRENCH, ENGLISH, SPANISH
+}
+
+relationship OneToOne {
+	CountryX{regionx} to RegionX
+}
+
+relationship OneToOne {
+	LocationX{countryx} to CountryX
+}
+
+relationship OneToOne {
+	DepartmentX{locationx} to LocationX
+}
+
+relationship ManyToMany {
+	JobX{task(title)} to TaskX{jobx}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	EmployeeX to JobX{employeex},
+	/**
+	* A relationship
+	*/
+	DepartmentX to
+	/**
+	* Another side of the same relationship
+	*/
+	EmployeeX{departmentx}
+}
+
+relationship ManyToOne {
+	EmployeeX{manager} to EmployeeX
+}
+
+// defining multiple oneToOne relationships
+relationship OneToOne {
+	JobHistoryX{jobx} to JobX,
+	JobHistoryX{departmentx} to DepartmentX,
+	JobHistoryX{employeex} to EmployeeX
+}
+
+// Set pagination options
+paginate JobHistoryX, EmployeeX with infinite-scroll
+paginate JobX with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except EmployeeX, JobX
+filter all
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
