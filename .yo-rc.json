@@ -42,7 +42,9 @@
     "jwtSecretKey": "OTIyMjY5ZTM1OTAzYWQxMzE0OWMzOWNkNDQ0YmJlY2MwZjg0ZGZmZTAyNGVhYzM5MmI2ZGY2MTYxNWIwMTdmNjIyZTZjMDljZDU2NDFiYTA0NTBjNDM3NDUzZTkzNGUzYWQ5MTk2YTVhMGJlMjMxNDNjYmZmMmU1NDhhMGQ3ZTk=",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "reactive": false
+    "reactive": false,
+    "entities": ["Region", "Country", "Location", "Department", "Task", "Employee", "Job", "JobHistory"],
+    "lastLiquibaseTimestamp": 1617631324000
   },
   "git-provider": "GitHub",
   "git-company": "spbbalaji",
